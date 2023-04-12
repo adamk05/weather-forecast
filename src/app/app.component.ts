@@ -11,19 +11,26 @@ export class AppComponent implements OnInit{
   lat: number|null = null;
   lng: number|null = null;
   days: number|null = null;
+  city = "";
 
   constructor(private forecastService: WeatherForecastService) {}
   
   ngOnInit(): void {
-    //testy metod z serwisu - działają
-    this.lat = 50.32;
-    this.lng = 18.79;
-    this.days = 2;
-    this.forecastService.getBaseWeatherData(this.lat, this.lng, this.days).subscribe((res) => {
-      console.log(res);
-    });
-    this.forecastService.getAdvancedWeatherData(this.lat, this.lng, this.days).subscribe((res) => {
-      console.log(res);
-    })
   }
+
+  submit(){
+    this.forecastService.getCityLatLng(this.city).subscribe((res) => {
+      if(!res.results){
+        console.log("brak wynikow");
+      }
+      else{
+        this.lat = res.results[0].latitude;
+        this.lng = res.results[0].longitude;
+        this.forecastService.getBaseWeatherData(this.lat!, this.lng!, this.days!).subscribe((forecastRes) => {
+          console.log(forecastRes);
+        })
+      }
+    });
+  }
+
 }
