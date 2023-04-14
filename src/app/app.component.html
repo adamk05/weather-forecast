@@ -1,6 +1,6 @@
 <img width="1000px" src="../assets/pogoda.jpg"/>
 <form #weatherForm="ngForm" (ngSubmit)="submit()">
-    <input type="text" [(ngModel)]="city"/>  
-    <input type="number" [(ngModel)]="days"/>
+    <input name="city" type="text" [(ngModel)]="city"/>  
+    <input name="days" type="number" [(ngModel)]="days"/>
     <button type="submit">Szukaj</button>
 </form>
