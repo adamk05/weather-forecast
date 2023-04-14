@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherForecastService } from './weather-forecast.service';
+import { DayForecast } from './DayForecast';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent implements OnInit{
   lat: number|null = null;
   lng: number|null = null;
   days: number|null = null;
+  dailyForecast: DayForecast[] = [];
   city = "";
 
   constructor(private forecastService: WeatherForecastService) {}
