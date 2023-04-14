@@ -4,3 +4,6 @@
     <input name="days" type="number" [(ngModel)]="days"/>
     <button type="submit">Szukaj</button>
 </form>
+<div *ngFor="let singleForecast of dailyForecast; index as i">
+    {{maxTemperature[i]}}
+</div>

@@ -8,5 +8,5 @@ export class DayForecast {
     visibiltity: number[] = [];
     windspeed: number[] = [];
 
-    constructor() { }
+    constructor(){}
 }

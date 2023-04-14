@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
   days: number|null = null;
   dailyForecast: DayForecast[] = [];
   city = "";
+  maxTemperature: number[] = [];
 
   constructor(private forecastService: WeatherForecastService) {}
   
@@ -45,4 +46,9 @@ export class AppComponent implements OnInit{
     });
   }
 
+  findMaxTemperature(){
+    for(let i = 0; i <= this.days!; i++){
+      this.maxTemperature.push(Math.max(...this.dailyForecast[i].temperature));
+    }
+  }
 }
