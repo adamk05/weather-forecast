@@ -37,8 +37,8 @@ export class AppComponent implements OnInit{
               dayForecast.precipitation = res.hourly.precipitation.slice(i, i + 24);
               dayForecast.cloudcover = res.hourly.cloudcover.slice(i, i + 24);
               this.dailyForecast.push(dayForecast);
-              this.findMaxTemperature();
             }
+            this.findMaxTemperature();
           },
           error: (e) => alert("Wystąpił błąd, nie pobrano danych")
         });
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit{
   findMaxTemperature(){
     for(let i = 0; i < this.days!; i++){
       console.log(this.days);
+      console.log(i);
       //console.log(this.dailyForecast[i].temperature);
       this.maxTemperature.push(Math.max(...this.dailyForecast[i].temperature));
       console.log(this.maxTemperature[i]);
