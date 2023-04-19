@@ -16,7 +16,7 @@ export class WeatherForecastService {
   }
 
   getAdvancedWeatherData(lat: number, lng: number, days: number): Observable<any> {
-    return this.http.get<any> (this.baseURL + '/forecast?latitude=' + lat.toString() + '&longitude=' + lng.toString() + '&hourly=temperature_2m,precipitation,rain,showers,snowfall,surface_pressure,cloudcover,visibility,windspeed_10m&forecast_days=' + days.toString());
+    return this.http.get<any> (this.baseURL + '/forecast?latitude=' + lat.toString() + '&longitude=' + lng.toString() + '&hourly=rain,snowfall,surface_pressure,visibility,windspeed_10m&forecast_days=' + days.toString());
   }
 
   getCityLatLng(city: string): Observable<any> {
