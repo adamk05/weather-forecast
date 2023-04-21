@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WeatherForecastService } from './weather-forecast.service';
 import { DayForecast } from './DayForecast';
+import { AdvancedForecast } from './AdvancedForecast';
 
 @Component({
   selector: 'app-root',
@@ -8,31 +9,37 @@ import { DayForecast } from './DayForecast';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'weather-forecast';
-  lat: number|null = null;
-  lng: number|null = null;
-  days: number|null = null;
+  lat: number | null = null;
+  lng: number | null = null;
+  days: number | null = null;
   dailyForecast: DayForecast[] = [];
+  advancedForecast: AdvancedForecast = new AdvancedForecast;
+  showAdvancedForecast = false;
   city = "";
   maxTemperature: number[] = [];
 
-  constructor(private forecastService: WeatherForecastService) {}
-  
+  constructor(private forecastService: WeatherForecastService) { }
+
   ngOnInit(): void {
-    
+
   }
 
-  submit(){
+  submit() {
+    this.showAdvancedForecast = false;
+    this.dailyForecast = [];
     this.forecastService.getCityLatLng(this.city).subscribe({
       next: (v) => {
-        if(!v.results){
+        if (!v.results) {
           alert("Nie znaleziono twojego miasta, wpisz inne");
           return;
         }
-        this.forecastService.getBaseWeatherData(v.results[0].latitude, v.results[0].longitude, this.days!).subscribe({
+        this.lat = v.results[0].latitude;
+        this.lng = v.results[0].longitude;
+        this.forecastService.getBaseWeatherData(this.lat!, this.lng!, this.days!).subscribe({
           next: (res) => {
-            for(let i = 0; i < this.days! * 24 - 1; i += 24){
+            for (let i = 0; i < this.days! * 24 - 1; i += 24) {
               let dayForecast = new DayForecast();
               dayForecast.temperature = res.hourly.temperature_2m.slice(i, i + 24);
               dayForecast.precipitation = res.hourly.precipitation.slice(i, i + 24);
@@ -48,14 +55,30 @@ export class AppComponent implements OnInit{
     });
   }
 
-  findMaxTemperature(){
-    for(let i = 0; i < this.days!; i++){
-      console.log(this.days);
-      console.log(i);
-      //console.log(this.dailyForecast[i].temperature);
-      this.maxTemperature.push(Math.max(...this.dailyForecast[i].temperature));
-      console.log(this.maxTemperature[i]);
-      console.log(this.maxTemperature.length);
-    }
+  findMaxTemperature() {
+    this.maxTemperature = [];
+    this.dailyForecast.forEach((forecast) => this.maxTemperature.push(Math.max(...forecast.temperature)));
+  }
+
+  getAverage(array: number[]): number{
+    let sum = 0;
+    array.forEach((element) => sum += element);
+    return sum / array.length;
+  }
+
+  downloadAdvancedData(i: number) {
+    this.showAdvancedForecast = true;
+    this.forecastService.getAdvancedWeatherData(this.lat!, this.lng!, this.days!).subscribe({
+      next: (res) => {
+        this.advancedForecast.pressure = res.hourly.surface_pressure.slice(i * 24, (i + 1) * 24);
+        this.advancedForecast.rain = res.hourly.rain.slice(i * 24, (i + 1) * 24);
+        this.advancedForecast.snowfall = res.hourly.snowfall.slice(i * 24, (i + 1) * 24);
+        this.advancedForecast.visibility = res.hourly.visibility.slice(i * 24, (i + 1) * 24);
+        this.advancedForecast.windspeed = res.hourly.windspeed_10m.slice(i * 24, (i + 1) * 24);
+      },
+      error: (err) => {
+        alert("Wystąpił błąd nie pobrano danych");
+      }
+    });
   }
 }

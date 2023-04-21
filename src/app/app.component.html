@@ -6,6 +6,16 @@
     <button type="submit">Szukaj</button>
 </form>
 <div *ngFor="let singleForecast of dailyForecast; index as i">
-    <div>{{maxTemperature[i]}}</div>
+    <div>Ciepłota {{maxTemperature[i]}}</div>
+    <div>Opady {{getAverage(singleForecast.precipitation)}}</div>
+    <div>Chmurki {{getAverage(singleForecast.cloudcover)}}</div>
+    <div><button (click)="downloadAdvancedData(i)">Wincyj</button></div>
+</div>
+<div *ngIf="showAdvancedForecast">
+    <label>Ciśneinie {{getAverage(advancedForecast.pressure)}}</label>
+    <label>Deszczyk {{getAverage(advancedForecast.rain)}}</label>
+    <label>Śnieżek {{getAverage(advancedForecast.snowfall)}}</label>
+    <label>Widzialność {{getAverage(advancedForecast.visibility)}}</label>
+    <label>Wiaterek {{getAverage(advancedForecast.windspeed)}}</label>
 </div>
 <div>JD</div>
