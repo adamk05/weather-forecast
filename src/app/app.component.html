@@ -1,4 +1,4 @@
-<img width="1000px" src="../assets/pogoda.jpg"/>
+<!-- <img width="1000px" src="../assets/pogoda.jpg"/> -->
 <form #weatherForm="ngForm" (ngSubmit)="submit()">
     <input name="city" type="text" [(ngModel)]="city"/>  
     <input name="days" type="number" [(ngModel)]="days"/>
@@ -7,3 +7,4 @@
 <div *ngFor="let singleForecast of dailyForecast; index as i">
     <div>{{maxTemperature[i]}}</div>
 </div>
+<div>JD</div>
