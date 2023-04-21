@@ -17,11 +17,18 @@
      
     <button type="submit" class="btn btn-primary submit-btn" [disabled]="weatherForm.invalid">Szukaj</button>
 </form>
-<div *ngFor="let singleForecast of dailyForecast; index as i">
-    <div>Ciepłota {{maxTemperature[i]}}</div>
-    <div>Opady {{getAverage(singleForecast.precipitation)}}</div>
-    <div>Chmurki {{getAverage(singleForecast.cloudcover)}}</div>
-    <div><button (click)="downloadAdvancedData(i)">Wincyj</button></div>
+<div class="dailyForecastContainer" *ngIf="dailyForecast.length != 0">
+    <div class="dailyForecastCard" *ngFor="let singleForecast of dailyForecast; index as i">
+        <div class="day">
+            {{singleForecast.day[0].toString() | date: 'dd-MM-yyyy'}}
+        </div>
+        <div class="temperature">
+            {{maxTemperature[i] }} <sup>O</sup>C
+        </div>
+        <div class="icon">
+            <img src="../assets/cloud.png"/>
+        </div>
+    </div>
 </div>
 <div *ngIf="showAdvancedForecast">
     <label>Ciśneinie {{getAverage(advancedForecast.pressure)}}</label>
