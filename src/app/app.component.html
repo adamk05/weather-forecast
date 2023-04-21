@@ -1,9 +1,21 @@
 <!-- <img width="1000px" src="../assets/pogoda.jpg"/> -->
 <!-- prawa do czarnego oczka <a href="https://pixlok.com/icons/eye-icon-svg-password-icon-png-free-download/">House photo created by Search png - www.pixlok.com</a> -->
-<form #weatherForm="ngForm" (ngSubmit)="submit()">
-    <input name="city" type="text" [(ngModel)]="city"/>  
-    <input name="days" type="number" [(ngModel)]="days"/>
-    <button type="submit">Szukaj</button>
+<form #weatherForm="ngForm" (ngSubmit)="submit()" class="cityForm">
+    <div class="input-group">
+        <div class="form-floating">
+            <input name="city" type="text" class="form-control city" id="city" [(ngModel)]="city" placeholder="Miasto" required/> 
+            <label for="city">Miasto</label>
+        </div>
+    </div>
+
+    <div class="input-group">
+        <div class="form-floating">
+            <input name="days" type="number" class="form-control days" id="days" [(ngModel)]="days" placeholder="days" required/>
+            <label for="city">Ilość dni</label>
+        </div>
+    </div>
+     
+    <button type="submit" class="btn btn-primary submit-btn" [disabled]="weatherForm.invalid">Szukaj</button>
 </form>
 <div *ngFor="let singleForecast of dailyForecast; index as i">
     <div>Ciepłota {{maxTemperature[i]}}</div>
