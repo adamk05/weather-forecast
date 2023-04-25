@@ -40,7 +40,8 @@ body{
     flex-direction: column;
     row-gap: 10px;
     background-color: rgba(255, 255, 255, 0.3);
-    margin: 0 !important;
+    margin: 0;
+
 }
 
 .dailyForecastContainer{
@@ -50,7 +51,6 @@ body{
     flex-direction: row;
     column-gap: 20px;
     flex-wrap: nowrap;
-
     overflow-x: auto;
 }
 
