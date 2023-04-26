@@ -3,33 +3,42 @@
 <form #weatherForm="ngForm" (ngSubmit)="submit()" class="cityForm">
     <div class="input-group">
         <div class="form-floating">
-            <input name="city" type="text" class="form-control city" id="city" [(ngModel)]="city" placeholder="Miasto" required/> 
+            <input name="city" type="text" class="form-control city" id="city" [(ngModel)]="city" placeholder="Miasto"
+                required />
             <label for="city">Miasto</label>
         </div>
     </div>
 
     <div class="input-group">
         <div class="form-floating">
-            <input name="days" type="number" class="form-control days" id="days" [(ngModel)]="days" placeholder="days" required/>
+            <input name="days" type="number" class="form-control days" id="days" [(ngModel)]="days" placeholder="days"
+                required />
             <label for="city">Ilość dni</label>
         </div>
     </div>
-     
+
     <button type="submit" class="btn btn-primary submit-btn" [disabled]="weatherForm.invalid">Szukaj</button>
 </form>
-<div class="dailyForecastContainer" *ngIf="dailyForecast.length != 0">
-    <div class="dailyForecastCard" *ngFor="let singleForecast of dailyForecast; index as i">
-        <div class="day">
-            {{singleForecast.day[0].toString() | date: 'dd-MM-yyyy'}}
-        </div>
-        <div class="temperature">
-            {{maxTemperature[i] }} <sup>o</sup>C
-        </div>
-        <div class="icon">
-            <img src="../assets/cloud.png"/>
+<div class="cityAndForecastContainer" *ngIf="dailyForecast.length != 0">
+    <h1 class="cityLabel">{{storagedCity}}</h1>
+    <div class="dailyForecastContainer" *ngIf="dailyForecast.length != 0">
+        <div class="dailyForecastCard" *ngFor="let singleForecast of dailyForecast; index as i">
+            <div class="day">
+                {{singleForecast.day[0].toString() | date: 'dd-MM-yyyy'}}
+            </div>
+            <div class="icon" [ngSwitch]="singleForecast.summary">
+                <img *ngSwitchCase="'cloudy'" src="../assets/cloud.png" height="125px" />
+                <img *ngSwitchCase="'partialCloudy'" src="../assets/partialy_cloud.png" height="125px" />
+                <img *ngSwitchCase="'sunny'" src="../assets/sun.png" height="125px" />
+                <img *ngSwitchCase="'rainy'" src="../assets/rain.png" height="125px" />
+            </div>
+            <div class="temperature">
+                {{maxTemperature[i] }}<sup>o</sup>C
+            </div>
         </div>
     </div>
 </div>
+
 <div *ngIf="showAdvancedForecast">
     <label>Ciśneinie {{getAverage(advancedForecast.pressure)}}</label>
     <label>Deszczyk {{getAverage(advancedForecast.rain)}}</label>
@@ -37,4 +46,3 @@
     <label>Widzialność {{getAverage(advancedForecast.visibility)}}</label>
     <label>Wiaterek {{getAverage(advancedForecast.windspeed)}}</label>
 </div>
-<div>JD</div>
