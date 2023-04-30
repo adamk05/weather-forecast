@@ -1,4 +1,4 @@
-export class AdvancedForecast{
+export class AdvancedForecastModel{
     rain: number[] = [];
     snowfall: number[] = [];
     pressure: number[] = [];

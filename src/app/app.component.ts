@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WeatherForecastService } from './weather-forecast.service';
 import { DayForecast } from './DayForecast';
-import { AdvancedForecast } from './AdvancedForecast';
+import { AdvancedForecastModel } from './AdvancedForecastModel';
 import { WeatherSummary } from './WeatherSummary';
 
 @Component({
@@ -16,10 +16,11 @@ export class AppComponent implements OnInit {
   lng: number | null = null;
   days: number | null = null;
   dailyForecast: DayForecast[] = [];
-  advancedForecast: AdvancedForecast = new AdvancedForecast;
-  showAdvancedForecast = false;
+  showAdvancedForecastFlag = false;
   city = "";
   storagedCity = "";
+  storagedDays: number | null = null;
+  dayIndex: number | null = null;
   maxTemperature: number[] = [];
 
   constructor(private forecastService: WeatherForecastService) { }
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   submit() {
-    this.showAdvancedForecast = false;
+    this.showAdvancedForecastFlag = false;
     this.dailyForecast = [];
     this.forecastService.getCityLatLng(this.city).subscribe({
       next: (v) => {
@@ -71,6 +72,7 @@ export class AppComponent implements OnInit {
             }
             this.findMaxTemperature();
             this.storagedCity = v.results[0].name;
+            this.storagedDays = this.days; 
           },
           error: (e) => alert("Wystąpił błąd, nie pobrano danych")
         });
@@ -90,19 +92,9 @@ export class AppComponent implements OnInit {
     return sum / array.length;
   }
 
-  downloadAdvancedData(i: number) {
-    this.showAdvancedForecast = true;
-    this.forecastService.getAdvancedWeatherData(this.lat!, this.lng!, this.days!).subscribe({
-      next: (res) => {
-        this.advancedForecast.pressure = res.hourly.surface_pressure.slice(i * 24, (i + 1) * 24);
-        this.advancedForecast.rain = res.hourly.rain.slice(i * 24, (i + 1) * 24);
-        this.advancedForecast.snowfall = res.hourly.snowfall.slice(i * 24, (i + 1) * 24);
-        this.advancedForecast.visibility = res.hourly.visibility.slice(i * 24, (i + 1) * 24);
-        this.advancedForecast.windspeed = res.hourly.windspeed_10m.slice(i * 24, (i + 1) * 24);
-      },
-      error: (err) => {
-        alert("Wystąpił błąd nie pobrano danych");
-      }
-    });
+  showAdvancedForecast(i: number){
+    this.showAdvancedForecastFlag = false;
+    this.showAdvancedForecastFlag = true;
+    this.dayIndex = i + 1;
   }
 }

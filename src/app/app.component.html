@@ -22,7 +22,7 @@
 <div class="cityAndForecastContainer" *ngIf="dailyForecast.length != 0">
     <h1 class="cityLabel">{{storagedCity}}</h1>
     <div class="dailyForecastContainer" *ngIf="dailyForecast.length != 0">
-        <div class="dailyForecastCard" *ngFor="let singleForecast of dailyForecast; index as i">
+        <div class="dailyForecastCard" *ngFor="let singleForecast of dailyForecast; index as i" (click)="showAdvancedForecast(i)">
             <div class="day">
                 {{singleForecast.day[0].toString() | date: 'dd-MM-yyyy'}}
             </div>
@@ -39,10 +39,4 @@
     </div>
 </div>
 
-<div *ngIf="showAdvancedForecast">
-    <label>Ciśneinie {{getAverage(advancedForecast.pressure)}}</label>
-    <label>Deszczyk {{getAverage(advancedForecast.rain)}}</label>
-    <label>Śnieżek {{getAverage(advancedForecast.snowfall)}}</label>
-    <label>Widzialność {{getAverage(advancedForecast.visibility)}}</label>
-    <label>Wiaterek {{getAverage(advancedForecast.windspeed)}}</label>
-</div>
+<app-advanced-forecast *ngIf="showAdvancedForecastFlag" [latitude]="lat" [longitude]="lng" [day]="dayIndex"></app-advanced-forecast>
