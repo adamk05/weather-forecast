@@ -1,7 +1,25 @@
-// .advancedForecastContainer{
-//     border-radius: 15px;
-//     background-color: rgba(255, 255, 255, 0.1);
-//     border: 2px grey solid;
-//     width: calc(100% - 40px);
-//     margin: 20px;
-// }
+.advancedForecastContainer{
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px grey solid;
+    width: calc(100% - 40px);
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 30vh;
+}
+
+.advancedForecastElement{
+    display: flex;
+    flex-direction: column;
+    padding: 2.5%;
+    width: calc(20% - 8px);
+}
+
+.icon{
+    // height: 70%;
+}
+
+.value{
+    height: 25%;
+}

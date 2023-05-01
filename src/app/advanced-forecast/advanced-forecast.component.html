@@ -1,7 +1,22 @@
 <div class="advancedForecastContainer">
-    <p>{{getAverage(this.advancedForecast.pressure) | number : '1.0-0'}}</p>
-    <p>{{getAverage(this.advancedForecast.rain) | number : '1.2-2'}}</p>
-    <p>{{getAverage(this.advancedForecast.snowfall) | number : '1.2-2'}}</p>
-    <p>{{roundNumber(getAverage(this.advancedForecast.visibility))}}</p>
-    <p>{{getAverage(this.advancedForecast.windspeed) | number : '1.0-0'}}</p>
+    <div class="advancedForecastElement">
+        <img class="icon" src="../../assets/pressure.png"/>
+        <label class="value">{{getAverage(this.advancedForecast.pressure) | number : '1.0-0'}}</label>
+    </div>
+    <div class="advancedForecastElement">
+        <img class="icon" src="../../assets/rain.png"/>
+        <label class="value">{{getAverage(this.advancedForecast.rain) | number : '1.2-2'}}</label>
+    </div>
+    <div class="advancedForecastElement">
+        <img class="icon" src="../../assets/snowfall.png"/>
+        <label class="value">{{getAverage(this.advancedForecast.snowfall) | number : '1.2-2'}}</label>
+    </div>
+    <div class="advancedForecastElement">
+        <img class="icon" src="../../assets/czarne_oczko.png"/>
+        <label class="value">{{roundNumber(getAverage(this.advancedForecast.visibility))}}</label>
+    </div>
+    <div class="advancedForecastElement">
+        <img class="icon" src="../../assets/windspeed.png"/>
+        <label class="value">{{getAverage(this.advancedForecast.windspeed) | number : '1.0-0'}}</label>
+    </div>
 </div>
