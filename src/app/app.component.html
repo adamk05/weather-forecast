@@ -27,10 +27,10 @@
                 {{singleForecast.day[0].toString() | date: 'dd-MM-yyyy'}}
             </div>
             <div class="icon" [ngSwitch]="singleForecast.summary">
-                <img *ngSwitchCase="'cloudy'" src="../assets/cloud.png" height="125px" />
-                <img *ngSwitchCase="'partialCloudy'" src="../assets/partialy_cloud.png" height="125px" />
-                <img *ngSwitchCase="'sunny'" src="../assets/sun.png" height="125px" />
-                <img *ngSwitchCase="'rainy'" src="../assets/rain.png" height="125px" />
+                <img *ngSwitchCase="'cloudy'" class="icon-img" src="../assets/cloud.png" />
+                <img *ngSwitchCase="'partialCloudy'" class="icon-img" src="../assets/partialy_cloud.png" />
+                <img *ngSwitchCase="'sunny'" class="icon-img" src="../assets/sun.png" />
+                <img *ngSwitchCase="'rainy'" class="icon-img" src="../assets/rain.png" />
             </div>
             <div class="temperature">
                 {{maxTemperature[i] }}<sup>o</sup>C

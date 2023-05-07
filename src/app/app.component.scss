@@ -6,11 +6,12 @@ body{
     display: grid;
     width: 30%;
     margin-left: 35%;
-    margin-top: 30px;
+    margin-top: 15px;
     column-gap: 10px;
     row-gap: 20px;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 3fr 2fr;
+    height: calc(20vh - 30px);
 }
 
 .city{
@@ -39,14 +40,16 @@ body{
     border: 2px grey solid;
     width: calc(100% - 40px);
     margin: 20px;
+    height: calc(50vh - 30px);
 }
 
 .dailyForecastCard{
-    width: 250px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    width: 30vh;
+    height: 30vh;
+    min-width: 30vh;
+    min-height: 30vh;
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
     background-color: rgba(255, 255, 255, 0.3);
     margin: 0;
     border-radius: 5%;
@@ -62,7 +65,7 @@ body{
 .cityLabel{
     width: 100%;
     text-align: center;
-    margin-top: 25px;
+    margin: 15px 0 0 0;
 }
 
 .dailyForecastContainer{
@@ -71,6 +74,7 @@ body{
     flex-direction: row;
     column-gap: 40px;
     padding: 25px;
+    padding-top: 15px;
     flex-wrap: nowrap;
     overflow-x: auto;
 }
@@ -78,14 +82,20 @@ body{
 .day{
     width: 100%;
     text-align: center;
+    grid-row: 1;
     font-size: 30px;
     font-weight: bold;
     margin-top: 10px;
 }
 
 .icon{
-    width: 250px;
+    grid-row: 2;
+    justify-content: center;
     text-align: center;
+}
+
+.icon-img{
+    width: 100%;
 }
 
 .temperature{
@@ -93,6 +103,7 @@ body{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    grid-row: 3;
 }
 
 ::-webkit-scrollbar-button{

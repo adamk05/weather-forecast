@@ -6,20 +6,25 @@
     margin: 20px;
     display: flex;
     flex-direction: row;
-    height: 30vh;
+    height: calc(30vh - 30px);
+    overflow-x: auto;
 }
 
 .advancedForecastElement{
-    display: flex;
-    flex-direction: column;
-    padding: 2.5%;
-    width: calc(20% - 8px);
+    display: grid;
+    grid-template-rows: 70% 30%;
 }
 
 .icon{
-    // height: 70%;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .value{
-    height: 25%;
+    display: flex;
+    grid-row: 2;
+    align-items: center;
+    justify-content: center;
 }
