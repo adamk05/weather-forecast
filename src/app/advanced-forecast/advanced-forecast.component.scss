@@ -8,9 +8,16 @@
     margin: 20px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     height: calc(30vh - 30px);
     overflow-x: auto;
 }
+
+.dateCaption{
+    width: 100%;
+    text-align: center;
+}
+
 
 .advancedForecastElement{
     display: grid;

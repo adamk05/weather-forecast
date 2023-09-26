@@ -12,12 +12,15 @@ export class AdvancedForecastComponent implements OnInit, OnChanges{
   @Input() latitude: number | null = null;
   @Input() longitude: number | null = null;
   @Input() day: number | null = null;
+  dateCaption: Date | null = null;
   advancedForecast: AdvancedForecastModel = new AdvancedForecastModel;
 
   constructor(private forecastService: WeatherForecastService){}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.downloadAdvancedData(this.day!);
+    this.dateCaption = new Date();
+    this.dateCaption?.setDate(new Date().getDate() + this.day! - 1);
   }
 
   ngOnInit(): void {
