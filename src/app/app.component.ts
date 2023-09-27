@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WeatherForecastService } from './weather-forecast.service';
 import { DayForecast } from './DayForecast';
-import { AdvancedForecastModel } from './AdvancedForecastModel';
 import { WeatherSummary } from './WeatherSummary';
 
 @Component({
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  submit() {
+  submit(): void{
     this.showAdvancedForecastFlag = false;
     this.dailyForecast = [];
     this.forecastService.getCityLatLng(this.city).subscribe({
@@ -48,13 +47,13 @@ export class AppComponent implements OnInit {
               dayForecast.precipitation = res.hourly.precipitation.slice(i, i + 24);
               dayForecast.cloudcover = res.hourly.cloudcover.slice(i, i + 24);
               dayForecast.day = res.hourly.time.slice(i, i + 24);
-              let rainyDays = 0;
+              let rainyHours = 0;
               dayForecast.precipitation.forEach((value) => {
-                if(value > 0.55){
-                  rainyDays ++;
+                if(value > 0.6){
+                  rainyHours ++;
                 }
               });
-              if(rainyDays >= 3){
+              if(rainyHours >= 3){
                 dayForecast.summary = WeatherSummary.Rainy;
               }
               else{
@@ -81,7 +80,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  findMaxTemperature() {
+  findMaxTemperature(): void{
     this.maxTemperature = [];
     this.dailyForecast.forEach((forecast) => this.maxTemperature.push(Math.max(...forecast.temperature)));
   }
@@ -92,7 +91,7 @@ export class AppComponent implements OnInit {
     return sum / array.length;
   }
 
-  showAdvancedForecast(i: number){
+  showAdvancedForecast(i: number): void{
     this.showAdvancedForecastFlag = false;
     this.showAdvancedForecastFlag = true;
     this.dayIndex = i + 1;

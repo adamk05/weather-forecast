@@ -11,7 +11,7 @@
 
     <div class="input-group">
         <div class="form-floating">
-            <input name="days" type="number" class="form-control days" id="days" [(ngModel)]="days" placeholder="days"
+            <input name="days" type="number" class="form-control days" [max]="16" id="days" [(ngModel)]="days" placeholder="days"
                 required />
             <label for="city">Ilość dni</label>
         </div>

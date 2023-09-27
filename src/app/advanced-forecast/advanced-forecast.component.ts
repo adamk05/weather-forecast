@@ -8,7 +8,7 @@ import { AdvancedForecastModel } from '../AdvancedForecastModel';
   templateUrl: './advanced-forecast.component.html',
   styleUrls: ['./advanced-forecast.component.scss']
 })
-export class AdvancedForecastComponent implements OnInit, OnChanges{
+export class AdvancedForecastComponent implements OnChanges{
   @Input() latitude: number | null = null;
   @Input() longitude: number | null = null;
   @Input() day: number | null = null;
@@ -23,11 +23,7 @@ export class AdvancedForecastComponent implements OnInit, OnChanges{
     this.dateCaption?.setDate(new Date().getDate() + this.day! - 1);
   }
 
-  ngOnInit(): void {
-
-  }
-
-  downloadAdvancedData(i: number) {
+  downloadAdvancedData(i: number): void{
     this.forecastService.getAdvancedWeatherData(this.latitude!, this.longitude!, this.day!).subscribe({
       next: (res) => {
         this.advancedForecast.pressure = res.hourly.surface_pressure.slice((i - 1) * 24, i * 24);
@@ -42,7 +38,7 @@ export class AdvancedForecastComponent implements OnInit, OnChanges{
     });
   }
 
-  roundNumber(i: number){
+  roundNumber(i: number): number{
     return Math.round(i);
   }
 
